@@ -48,6 +48,12 @@ public class StudentSerializer implements CustomSerializable<Student>{
      * @param student The Student object whose grades must be serialized.
      * @return A string representing the student's grades.
      */
+    /**
+     * Helper method to create a string of the student's grades.
+     *
+     * @param student The Student object whose grades must be serialized.
+     * @return A string representing the student's grades.
+     */
     private String getGradesString(Student student) {
         StringBuilder gradesStringBuilder = new StringBuilder();
 
@@ -55,12 +61,16 @@ public class StudentSerializer implements CustomSerializable<Student>{
             if (gradesStringBuilder.length() > 0) {
                 gradesStringBuilder.append("; ");
             }
+
+            Double grade = entry.getValue();
+            String gradeValue = grade == null ? "not graded" : String.valueOf(grade);
+
             gradesStringBuilder
                     .append(entry.getKey().getName())
                     .append(" -> ")
                     .append(entry.getKey().getType())
                     .append(" -> ")
-                    .append(entry.getValue());
+                    .append(gradeValue);
         }
 
         return gradesStringBuilder.toString();

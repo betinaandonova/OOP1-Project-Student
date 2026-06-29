@@ -216,16 +216,25 @@ public class Student {
 
     /**
      * Calculates the average grade of the student based on the recorded grades in the {@code gradesBySubject} map.
+     * Subjects without grade are calculated as failed exams with grade 2.00.
      *
      * @return The average grade.
      */
     private double calculateAverageGrade() {
         int gradesCount = gradesBySubject.size();
-        Collection<Double> studentGrades = gradesBySubject.values();
+
+        if (gradesCount == 0) {
+            return 0;
+        }
+
         double gradesSum = 0;
 
-        for(Double grade : studentGrades) {
-            gradesSum += grade;
+        for (Double grade : gradesBySubject.values()) {
+            if (grade == null) {
+                gradesSum += 2.00;
+            } else {
+                gradesSum += grade;
+            }
         }
 
         return gradesSum / gradesCount;

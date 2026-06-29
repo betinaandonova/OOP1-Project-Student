@@ -74,7 +74,12 @@ public class StudentDeserializer implements CustomDeserializable<Student> {
             String subjectName = gradeSplit[0];
             String subjectType = gradeSplit[1];
             Subject subject = new Subject(subjectName, subjectType);
-            Double grade = Double.valueOf(gradeSplit[2]);
+            Double grade = null;
+
+            if (!gradeSplit[2].equalsIgnoreCase("not graded")) {
+                grade = Double.valueOf(gradeSplit[2]);
+            }
+
             gradesBySubject.put(subject, grade);
         }
 
